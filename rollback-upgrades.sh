@@ -17,14 +17,12 @@ if [[ $? != 0 ]]; then
   exit 1
 fi
 
-function check_input_date_not_more_than_2_days_ago() {
-  two_days_ago=$(date -d "$td -2 days" '+%Y-%m-%d')
+two_days_ago=$(date -d "$td -2 days" '+%Y-%m-%d')
+if [[ "$fd" < "$two_days_ago" ]]; then
+  echo "This script blocks rolling back upgrades older than 2 days"
+  exit 1
+fi
 
-  if [[ "$fd" < "$two_days_ago" ]]; then
-    echo "This script blocks rolling back upgrades older than 2 days"
-    exit 1
-  fi
-}
 
 TEMPFILE="$(mktemp /tmp/rollback-XXXX)"
 trap 'rm -f $TEMPFILE' EXIT
