@@ -6,6 +6,9 @@ by the `date` util.
 
 ## Examples
 `rollback-upgrades.sh 2024-12-05 #Giving a full date as the starting date`
+
 `rollback-upgrades.sh 241205 #Same as above, but with shortened format`
+
 `rollback-upgrades.sh today #undoes all changes made today`
+
 `rollback-upgrades.sh '3 days ago' #will be blocked by the script`
