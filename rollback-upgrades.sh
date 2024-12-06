@@ -18,14 +18,9 @@ if [[ $? != 0 ]]; then
 fi
 
 function check_input_date_not_more_than_2_days_ago() {
-  local fd_seconds
-  local td_seconds
-  fd_seconds=$(date -d "$fd" +%s)
-  td_seconds=$(date +%s)
-  local diff=$((td_seconds - fd_seconds))
-  local two_days_in_seconds='172800'
+  two_days_ago=$(date -d "$td -2 days" '+%Y-%m-%d')
 
-  if ((diff > two_days_in_seconds)); then
+  if [[ "$fd" < "$two_days_ago" ]]; then
     echo "This script blocks rolling back upgrades older than 2 days"
     exit 1
   fi
